@@ -2,15 +2,21 @@ import streamlit as st
 import PyPDF2
 from gensim.utils import simple_preprocess
 from gensim.models import Word2Vec
-import nltk
-import os
 import tempfile
 import numpy as np
 from nltk.tokenize import sent_tokenize
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Ensure necessary NLTK data is available
-nltk.download('punkt')
+import nltk
+import os
+
+# Set NLTK data directory to avoid conflicts
+nltk_data_path = os.path.join(os.getcwd(), "nltk_data")
+os.makedirs(nltk_data_path, exist_ok=True)  # Ensure the directory exists
+nltk.data.path.append(nltk_data_path)
+
+# Download necessary data
+nltk.download('punkt', download_dir=nltk_data_path)
 
 st.set_page_config(page_title="AI Hiring Assistant", layout="wide")
 
